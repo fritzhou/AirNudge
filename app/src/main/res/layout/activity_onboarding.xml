@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/welcome_title" android:textColor="@color/text_primary" android:textSize="30sp" android:textStyle="bold" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/welcome_body" android:textColor="@color/text_secondary" android:textSize="16sp" />
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:background="@drawable/card_background" android:padding="16dp" android:text="@string/privacy_details" android:textColor="@color/text_primary" />
+
+        <TextView android:id="@+id/onboardingCameraStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:text="@string/camera_not_ready" android:textStyle="bold" />
+        <Button android:id="@+id/onboardingCameraButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/grant_camera_access" />
+
+        <TextView android:id="@+id/onboardingAccessibilityStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/accessibility_not_ready" android:textStyle="bold" />
+        <Button android:id="@+id/onboardingAccessibilityButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/open_accessibility_setup" />
+
+        <Button android:id="@+id/tutorialButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/view_gesture_tutorial" />
+        <Button android:id="@+id/onboardingContinueButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:text="@string/continue_to_airnudge" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="air_blue">#315DAB</color>
+    <color name="air_blue_dark">#244982</color>
+    <color name="surface">#F7F8FC</color>
+    <color name="card">#FFFFFF</color>
+    <color name="text_primary">#1B1D22</color>
+    <color name="text_secondary">#5F636D</color>
+    <color name="status_good">#217A45</color>
+    <color name="status_inactive">#6D717A</color>
+</resources>

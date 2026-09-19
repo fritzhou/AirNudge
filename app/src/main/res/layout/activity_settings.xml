@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gesture_settings"
+            android:textColor="@color/text_primary"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/sensitivity"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/sensitivitySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cooldown" />
+
+            <TextView
+                android:id="@+id/cooldownValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/cooldownSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="19" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/action_mapping"
+            android:textColor="@color/text_primary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/open_palm" />
+        <Spinner android:id="@+id/openPalmAction" android:layout_width="match_parent" android:layout_height="48dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/closed_fist" />
+        <Spinner android:id="@+id/closedFistAction" android:layout_width="match_parent" android:layout_height="48dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pinch" />
+        <Spinner android:id="@+id/pinchAction" android:layout_width="match_parent" android:layout_height="48dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/swipe_up" />
+        <Spinner android:id="@+id/swipeUpAction" android:layout_width="match_parent" android:layout_height="48dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/swipe_down" />
+        <Spinner android:id="@+id/swipeDownAction" android:layout_width="match_parent" android:layout_height="48dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/swipe_left" />
+        <Spinner android:id="@+id/swipeLeftAction" android:layout_width="match_parent" android:layout_height="48dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/swipe_right" />
+        <Spinner android:id="@+id/swipeRightAction" android:layout_width="match_parent" android:layout_height="48dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/air_cursor"
+            android:textColor="@color/text_primary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Switch
+            android:id="@+id/airCursorSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enable_air_cursor" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/cursor_sensitivity" />
+        <TextView android:id="@+id/cursorSensitivityValue" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <SeekBar android:id="@+id/cursorSensitivitySeekBar" android:layout_width="match_parent" android:layout_height="wrap_content" android:max="100" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/smoothing" />
+        <TextView android:id="@+id/smoothingValue" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <SeekBar android:id="@+id/smoothingSeekBar" android:layout_width="match_parent" android:layout_height="wrap_content" android:max="100" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/pointer_size" />
+        <TextView android:id="@+id/pointerSizeValue" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <SeekBar android:id="@+id/pointerSizeSeekBar" android:layout_width="match_parent" android:layout_height="wrap_content" android:max="36" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/cursor_help"
+            android:textColor="@color/text_secondary" />
+
+        <Button android:id="@+id/calibrationButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:text="@string/calibration" />
+        <Button android:id="@+id/resetCalibrationButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/clear_calibration" />
+        <Button android:id="@+id/settingsTutorialButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/view_gesture_tutorial" />
+        <Button android:id="@+id/privacySetupButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/review_privacy_setup" />
+    </LinearLayout>
+</ScrollView>

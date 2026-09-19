@@ -1,0 +1,75 @@
+name: Build and publish APK
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag, for example v1.0.0
+        required: true
+        default: v1.0.0
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Restore Gradle cache
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Prepare release signing key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.AIRNUDGE_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.AIRNUDGE_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.AIRNUDGE_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.AIRNUDGE_KEY_PASSWORD }}
+        run: |
+          test -n "$KEYSTORE_BASE64" && test -n "$KEYSTORE_PASSWORD" && \
+            test -n "$KEY_ALIAS" && test -n "$KEY_PASSWORD" || {
+            echo "One or more AirNudge signing secrets are not configured" >&2
+            exit 1
+          }
+          echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/airnudge-release.jks"
+
+      - name: Test and build signed release APK
+        env:
+          AIRNUDGE_KEYSTORE_FILE: ${{ runner.temp }}/airnudge-release.jks
+          AIRNUDGE_KEYSTORE_PASSWORD: ${{ secrets.AIRNUDGE_KEYSTORE_PASSWORD }}
+          AIRNUDGE_KEY_ALIAS: ${{ secrets.AIRNUDGE_KEY_ALIAS }}
+          AIRNUDGE_KEY_PASSWORD: ${{ secrets.AIRNUDGE_KEY_PASSWORD }}
+        run: ./gradlew --no-daemon testDebugUnitTest assembleRelease
+
+      - name: Verify and checksum APK
+        run: |
+          APK=app/build/outputs/apk/release/app-release.apk
+          test -f "$APK"
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose "$APK"
+          sha256sum "$APK" > "$APK.sha256"
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+        run: |
+          gh release view "$RELEASE_TAG" >/dev/null 2>&1 || \
+            gh release create "$RELEASE_TAG" --title "AirNudge $RELEASE_TAG" --generate-notes
+          gh release upload "$RELEASE_TAG" \
+            app/build/outputs/apk/release/app-release.apk \
+            app/build/outputs/apk/release/app-release.apk.sha256 \
+            --clobber
